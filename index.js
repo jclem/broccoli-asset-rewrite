@@ -114,8 +114,14 @@ AssetRewrite.prototype.rewriteAssetPath = function (string, assetPath, replaceme
       continue;
     }
 
+    var hash = '';
+    var hashMatch;
+    if ((hashMatch = match[1].match(/(#.*)$/))) {
+      hash = hashMatch[1];
+    }
+
     if (this.prepend && this.prepend !== '') {
-      replaceString = this.prepend + replacementPath;
+      replaceString = this.prepend + replacementPath + hash;
     } else {
       replaceString = match[1].replace(assetPath, replacementPath);
     }
